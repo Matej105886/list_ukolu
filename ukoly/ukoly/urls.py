@@ -1,3 +1,4 @@
+from ukoly import views
 """
 URL configuration for ukoly project.
 
@@ -19,4 +20,5 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('goals/', views.goals)
 ]
