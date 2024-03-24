@@ -20,5 +20,6 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('goals/', views.goals)
+    path('goals/', views.goals),
+    path('tasks/<int:goal_id>/add_task', views.add_task_to_goal)
 ]
