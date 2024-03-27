@@ -1,6 +1,7 @@
 from .models import Goal
 from rest_framework.decorators import api_view
 from .serializers import GoalSerializer
+from .serializers import TaskSerializer
 from rest_framework.response import Response
 from rest_framework import status
 @api_view(["GET", "POST"])
@@ -21,6 +22,11 @@ def add_task_to_goal(request, goal_id):
         goal = Goal.objects.get(id=goal_id)
     except Goal.DoesNotExist:
         return Response({"error":"goal not found"}, status.HTTP_400_BAD_REQUEST)
+    serializer = TaskSerializer(data=request.data)
+    if serializer.is_valid():
+        saved_task = serializer.save(goal=goal)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
