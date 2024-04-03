@@ -12,26 +12,19 @@ function Goal({goal}){
     async function handleSubmit(e){
         e.preventDefault()
         const response = await fetch(`${URL}/tasks/${goal.id}/add_task/`, {
-            method:"POST",
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({title: title, description: description})
         })
-        if (response.ok){
-            const nGoal = await response.json()
-            set([...goals, nGoal])
-            console.log("cil pridan")
-        }
-        else{
-            console.log("chyba pridavani cile")
-        }
+    }
 
     return (
         <div>
             <h1>{goal.name}</h1>
             <h2>{goal.description}</h2>
-            {displayalltasks()
+            {/*{displayalltasks()}*/}
             <form onSubmit={handleSubmit}>
                 <label>název tasku:</label>
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
