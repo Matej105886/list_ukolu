@@ -1,10 +1,12 @@
 import Goals from "./Goals";
 import {useState, useEffect} from "react";
+import CreateGoal from "./CreateGoal";
+import {URL} from "../Constants/Constants";
 
 function ToDoList(){
     const [goals, setGoals] = useState(["ahoj"])
     async function fetchGoals(){
-        const response = await fetch("http://localhost:8000/goals/")
+        const response = await fetch(`${URL}/goals/`)
         const goalsData = await response.json()
         console.log(JSON.stringify(goalsData))
         await setGoals(goalsData)
@@ -14,6 +16,7 @@ function ToDoList(){
     return (
         <div>
             <Goals goals={goals}/>
+            <CreateGoal goals={goals} setGoals={setGoals}/>
         </div>
     )
 }

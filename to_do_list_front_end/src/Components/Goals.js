@@ -5,7 +5,7 @@ function Goals({goals}){
     }
     return (
         <div>
-            {displayAllGoals}
+            {displayAllGoals()}
         </div>
     )
 }
