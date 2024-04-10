@@ -1,4 +1,5 @@
 from .models import Goal
+from .models import Task
 from rest_framework.decorators import api_view
 from .serializers import GoalSerializer
 from .serializers import TaskSerializer
@@ -27,6 +28,18 @@ def add_task_to_goal(request, goal_id):
         saved_task = serializer.save(goal=goal)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(["DELETE"])
+def delete_goal(request, goal_id):
+    goal = Goal.objects.get(id=goal_id)
+    goal.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(["DELETE"])
+def delete_task(request, task_id):
+    task = Task.objects.get(id=task_id)
+    task.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 

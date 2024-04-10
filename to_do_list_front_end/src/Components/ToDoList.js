@@ -4,7 +4,7 @@ import CreateGoal from "./CreateGoal";
 import {URL} from "../Constants/Constants";
 
 function ToDoList(){
-    const [goals, setGoals] = useState(["ahoj"])
+    const [goals, setGoals] = useState([])
     async function fetchGoals(){
         const response = await fetch(`${URL}/goals/`)
         const goalsData = await response.json()
@@ -15,7 +15,7 @@ function ToDoList(){
     useEffect(()=>{fetchGoals()}, [])
     return (
         <div>
-            <Goals goals={goals}/>
+            <Goals goals={goals} setGoals={setGoals}/>
             <CreateGoal goals={goals} setGoals={setGoals}/>
         </div>
     )

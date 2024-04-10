@@ -21,5 +21,7 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('goals/', views.goals),
-    path('tasks/<int:goal_id>/add_task', views.add_task_to_goal)
+    path('tasks/<int:goal_id>/add_task/', views.add_task_to_goal),
+    path('tasks/<int:task_id>/delete_task/', views.delete_task),
+    path('goals/<int:goal_id>/', views.delete_goal)
 ]
