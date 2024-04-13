@@ -11,7 +11,7 @@ function Goals({goals, setGoals}){
     )
 
     async function deleteGoal(goalId){
-        const response = await fetch(`${URL}/goals/${goalId}/`, {
+        const response = await fetch(`${URL}/goals/${goalId}/delete_goal/`, {
             method:"DELETE",
         })
         if (response.ok){

@@ -23,5 +23,7 @@ urlpatterns = [
     path('goals/', views.goals),
     path('tasks/<int:goal_id>/add_task/', views.add_task_to_goal),
     path('tasks/<int:task_id>/delete_task/', views.delete_task),
-    path('goals/<int:goal_id>/', views.delete_goal)
+    path('goals/<int:goal_id>/delete_goal/', views.delete_goal),
+    path('goals/<int:goal_id>/edit_goal/', views.edit_goal),
+    path('goals/<int:goal_id>/get_goal/', views.get_goal)
 ]

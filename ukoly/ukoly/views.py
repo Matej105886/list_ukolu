@@ -41,5 +41,20 @@ def delete_task(request, task_id):
     task.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+@api_view(["PUT"])
+def edit_goal(request, goal_id):
+    goal = Goal.objects.get(id=goal_id)
+    serializer = GoalSerializer(goal, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(["GET"])
+def get_goal(request, goal_id):
+    goal = Goal.objects.get(id=goal_id)
+    serializer = GoalSerializer(goal, many=False)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 

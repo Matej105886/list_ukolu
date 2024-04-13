@@ -1,6 +1,7 @@
 import Task from "./Task";
 import {useState} from "react";
 import {URL} from "../Constants/Constants";
+import {Link} from "react-router-dom";
 
 function Goal({goal:inicialGoal, deleteGoal}){
     const [title, setTitle] = useState("")
@@ -65,8 +66,11 @@ function Goal({goal:inicialGoal, deleteGoal}){
                 <button type="submit">vytvořit task</button>
                 <button type="button" onClick={handleDeleteGoal}>odstranit goal</button>
             </form>
+            <Link to={`/edit_goal/${goal.id}/`}>
+                <button>edit goal</button>
+            </Link>
         </div>
     )
-    }
+}
 
 export default Goal
