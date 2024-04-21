@@ -5,6 +5,7 @@ from .serializers import GoalSerializer
 from .serializers import TaskSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import get_object_or_404
 @api_view(["GET", "POST"])
 def goals(request):
     if request.method == "GET":
@@ -52,9 +53,24 @@ def edit_goal(request, goal_id):
 
 @api_view(["GET"])
 def get_goal(request, goal_id):
-    goal = Goal.objects.get(id=goal_id)
+    goal = get_object_or_404(Goal, pk=goal_id)
     serializer = GoalSerializer(goal, many=False)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 
+@api_view(["PUT"])
+def edit_task(request, task_id):
+    task = Task.objects.get(id=task_id)
+    serializer = TaskSerializer(task, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET"])
+def get_task(request, task_id):
+    task = Task.objects.get(id=task_id)
+    serializer = TaskSerializer(task, many=False)
+    return Response(serializer.data, status=status.HTTP_200_OK)
